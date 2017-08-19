@@ -6,20 +6,29 @@ import (
 	"github.com/asafschers/goscore"
 )
 
+const simpleSetPredicate1 = `<SimpleSetPredicate field="f1" booleanOperator="isIn">
+                            <Array n="6" type="string">v1 v2 v3</Array>
+                            </SimpleSetPredicate>`
+const simpleSetPredicate2 = `<SimpleSetPredicate field="f2" booleanOperator="isIn">
+							  <Array n="6" type="string">"Missing"   "No Match"</Array>
+							  </SimpleSetPredicate>`
+
 var simpleSetPredicateTests = []struct {
 	predicate	[]byte
 	features    map[string]string
 	expected	bool
 }{
-	{[]byte(`<SimpleSetPredicate field="f1" booleanOperator="isIn">
-                          <Array n="6" type="string">v1 v2 v3</Array>
-                          </SimpleSetPredicate>`),
+	{  []byte(simpleSetPredicate1),
 		map[string]string{"f1": "v3"},
 		true},
-	{[]byte(`<SimpleSetPredicate field="f1" booleanOperator="isIn">
-                          <Array n="6" type="string">v1 v2 v3</Array>
-                          </SimpleSetPredicate>`),
+	{[]byte(simpleSetPredicate1),
 		map[string]string{"f1": "v4"},
+		false},
+	{[]byte(simpleSetPredicate2),
+		map[string]string{"f2": "No Match"},
+		true},
+	{[]byte(simpleSetPredicate2),
+		map[string]string{"f2": "Match"},
 		false},
 }
 
