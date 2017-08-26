@@ -41,23 +41,24 @@ func GenerateTree(data []byte, n *Node) {
 
 func TraverseTree(n Node, features map[string]string) (score float64){
 	curr := n.Nodes[0]
-
 	for len(curr.Nodes) > 0 {
 		prev_id := curr.Attrs[0].Value
-
-		for _, node := range curr.Nodes {
-			if node.XMLName.Local == "True" || node.SimplePredicate.True(features) || node.SimpleSetPredicate.True(features) {
-				curr = node
-				break
-			}
-		}
-
+		curr = Step(curr, features)
 		if prev_id == curr.Attrs[0].Value {
 			break
 		}
 	}
-
 	score, _ = strconv.ParseFloat(curr.Attrs[1].Value, 64)
 	return score
+}
+
+func Step(curr Node, features map[string]string) Node {
+	for _, node := range curr.Nodes {
+		if node.XMLName.Local == "True" || node.SimplePredicate.True(features) || node.SimpleSetPredicate.True(features) {
+			curr = node
+			break
+		}
+	}
+	return curr
 }
 
