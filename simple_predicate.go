@@ -1,6 +1,8 @@
 package goscore
 
-import "strconv"
+import (
+	"strconv"
+)
 
 type SimplePredicate struct {
 	Field     string `xml:"field,attr"`

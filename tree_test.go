@@ -99,7 +99,6 @@ var TreeTests = []struct {
 	},
 }
 
-
 // TODO: test score distribution
 // TODO: restore mining schema
 // TODO: errors on unknown value
