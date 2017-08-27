@@ -59,11 +59,11 @@ const treeXml = `
 </TreeModel>`
 
 var TreeTests = []struct {
-	features    map[string]string
-	score		float64
+	features map[string]string
+	score    float64
 }{
-	{  map[string]string{},
-	     4.3463944950723456E-4,
+	{map[string]string{},
+		4.3463944950723456E-4,
 	},
 	{
 		map[string]string{"f2": "f2v1"},
@@ -74,11 +74,11 @@ var TreeTests = []struct {
 		-6.237581139073701E-4,
 	},
 	{
-		map[string]string{ "f2": "f2v1", "f1": "f1v3", "f4": "0.08" },
+		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.08"},
 		0.0021968294712358194,
 	},
 	{
-		map[string]string{ "f2": "f2v1", "f1": "f1v3", "f4": "0.09" },
+		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.09"},
 		-9.198573460887271E-4,
 	},
 	{
@@ -117,4 +117,3 @@ func TestTree(t *testing.T) {
 		}
 	}
 }
-

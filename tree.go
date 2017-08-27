@@ -1,26 +1,26 @@
 package goscore
 
 import (
-	"encoding/xml"
 	"bytes"
+	"encoding/xml"
 	"strconv"
 )
 
-type True struct {}
+type True struct{}
 
 type Node struct {
-	XMLName 			xml.Name
-	Attrs  				[]xml.Attr 			`xml:"-"`
-	Content 			[]byte     			`xml:",innerxml"`
-	Nodes   			[]Node     			`xml:",any"`
-	True			 	True			 	"xml:True"
-	SimplePredicate 	SimplePredicate 	"xml:SimplePredicate"
-	SimpleSetPredicate 	SimpleSetPredicate 	"xml:SimpleSetPredicate"
+	XMLName            xml.Name
+	Attrs              []xml.Attr         `xml:"-"`
+	Content            []byte             `xml:",innerxml"`
+	Nodes              []Node             `xml:",any"`
+	True               True               "xml:True"
+	SimplePredicate    SimplePredicate    "xml:SimplePredicate"
+	SimpleSetPredicate SimpleSetPredicate "xml:SimpleSetPredicate"
 }
 
 type DecisionTreeNode struct {
-	Predicate 			string
-	Nodes   			[]DecisionTreeNode
+	Predicate string
+	Nodes     []DecisionTreeNode
 }
 
 func (n *Node) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
@@ -39,7 +39,7 @@ func GenerateTree(data []byte, n *Node) {
 	}
 }
 
-func TraverseTree(n Node, features map[string]string) (score float64){
+func TraverseTree(n Node, features map[string]string) (score float64) {
 	curr := n.Nodes[0]
 	for len(curr.Nodes) > 0 {
 		prev_id := curr.Attrs[0].Value
@@ -61,4 +61,3 @@ func Step(curr Node, features map[string]string) Node {
 	}
 	return curr
 }
-

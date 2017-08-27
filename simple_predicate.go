@@ -5,9 +5,9 @@ import (
 )
 
 type SimplePredicate struct {
-	Field     string `xml:"field,attr"`
-	Operator  string `xml:"operator,attr"`
-	Value     string `xml:"value,attr"`
+	Field    string `xml:"field,attr"`
+	Operator string `xml:"operator,attr"`
+	Value    string `xml:"value,attr"`
 }
 
 func (p SimplePredicate) True(features map[string]string) bool {
@@ -25,9 +25,8 @@ func (p SimplePredicate) True(features map[string]string) bool {
 	} else if p.Operator == "greaterOrEqual" {
 		return featureValue >= predicateValue
 	} else if p.Operator == "isMissing" {
-		_, exists := features[p.Field];
+		_, exists := features[p.Field]
 		return !exists
 	}
 	return false
 }
-

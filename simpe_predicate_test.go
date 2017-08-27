@@ -1,22 +1,22 @@
 package goscore_test
 
 import (
-	"testing"
 	"encoding/xml"
 	"github.com/asafschers/goscore"
+	"testing"
 )
 
 var simplePredicateTests = []struct {
-	predicate	[]byte
-	features    map[string]string
-	expected	bool
+	predicate []byte
+	features  map[string]string
+	expected  bool
 }{
 	{[]byte(`<SimplePredicate field="f33" operator="equal" value="18.85"/>`),
 		map[string]string{"f33": "18.850"},
 		true},
 	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
-	map[string]string{"f33": "18.84"},
-	true},
+		map[string]string{"f33": "18.84"},
+		true},
 	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
 		map[string]string{"f33": "18.86"},
 		false},
@@ -46,5 +46,3 @@ func TestSimplePredicate(t *testing.T) {
 		}
 	}
 }
-
-
