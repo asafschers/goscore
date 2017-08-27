@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/asafschers/goscore.svg?branch=master)](https://travis-ci.org/asafschers/goscore)
+
 # Goscore
 
 Go scoring API for Predictive Model Markup Language (PMML).
