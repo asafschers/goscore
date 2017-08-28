@@ -13,8 +13,6 @@ Contact me here or at aschers@gmail.com.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
 ```
 go get github.com/asafschers/goscore
 ```
