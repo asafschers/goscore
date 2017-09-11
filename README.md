@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/asafschers/goscore.svg?branch=master)](https://travis-ci.org/asafschers/goscore)
 [![Go Report Card](https://goreportcard.com/badge/github.com/asafschers/goscore)](https://goreportcard.com/report/github.com/asafschers/goscore)
-
+[![Coverage Status](https://coveralls.io/repos/github/asafschers/goscore/badge.svg?branch=master)](https://coveralls.io/github/asafschers/goscore?branch=master)
 # Goscore
 
 Go scoring API for Predictive Model Markup Language (PMML).
