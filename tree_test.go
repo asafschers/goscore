@@ -111,7 +111,7 @@ func TestTree(t *testing.T) {
 	for _, tt := range TreeTests {
 		actual := goscore.TraverseTree(n, tt.features)
 		if actual != tt.score {
-			t.Errorf("expected %t, actual %t",
+			t.Errorf("expected %f, actual %f",
 				tt.score,
 				actual)
 		}
