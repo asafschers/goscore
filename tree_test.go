@@ -100,7 +100,7 @@ var TreeTests = []struct {
 }
 
 // TODO: test score distribution
-// TODO: restore mining schema
+// TODO: restore mining schema to pmml
 // TODO: errors on unknown value
 
 func TestTree(t *testing.T) {

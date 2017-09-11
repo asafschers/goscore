@@ -13,9 +13,9 @@ type Node struct {
 	Attrs              []xml.Attr         `xml:"-"`
 	Content            []byte             `xml:",innerxml"`
 	Nodes              []Node             `xml:",any"`
-	True               True               "xml:True"
-	SimplePredicate    SimplePredicate    "xml:SimplePredicate"
-	SimpleSetPredicate SimpleSetPredicate "xml:SimpleSetPredicate"
+	True               True               `xml:"True"`
+	SimplePredicate    SimplePredicate    `xml:"SimplePredicate""`
+	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate""`
 }
 
 type DecisionTreeNode struct {
