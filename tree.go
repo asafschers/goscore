@@ -18,6 +18,7 @@ type Node struct {
 	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate"`
 }
 
+// TraverseTree - traverses Node predicates with features as input and returns score by terminal node
 func TraverseTree(n Node, features map[string]string) (score float64) {
 	curr := n.Nodes[0]
 	for len(curr.Nodes) > 0 {
