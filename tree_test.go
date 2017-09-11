@@ -3,6 +3,7 @@ package goscore_test
 import (
 	"github.com/asafschers/goscore"
 	"testing"
+	"encoding/xml"
 )
 
 const treeXml = `
@@ -106,7 +107,7 @@ var TreeTests = []struct {
 func TestTree(t *testing.T) {
 	tree := []byte(treeXml)
 	var n goscore.Node
-	goscore.GenerateTree(tree, &n)
+	xml.Unmarshal(tree, &n)
 
 	for _, tt := range TreeTests {
 		actual := goscore.TraverseTree(n, tt.features)

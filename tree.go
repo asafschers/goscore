@@ -1,7 +1,6 @@
 package goscore
 
 import (
-	"bytes"
 	"encoding/xml"
 	"strconv"
 )
@@ -17,16 +16,6 @@ type Node struct {
 	True               truePredicate      `xml:"True"`
 	SimplePredicate    SimplePredicate    `xml:"SimplePredicate"`
 	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate"`
-}
-
-func GenerateTree(data []byte, n *Node) {
-	buffer := bytes.NewBuffer(data)
-	decoder := xml.NewDecoder(buffer)
-
-	err := decoder.Decode(&n)
-	if err != nil {
-		panic(err)
-	}
 }
 
 func TraverseTree(n Node, features map[string]string) (score float64) {
