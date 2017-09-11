@@ -1,9 +1,9 @@
 package goscore_test
 
 import (
+	"encoding/xml"
 	"github.com/asafschers/goscore"
 	"testing"
-	"encoding/xml"
 )
 
 const treeXml = `

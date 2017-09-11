@@ -4,7 +4,7 @@ import (
 	"github.com/mattn/go-shellwords"
 )
 
-// SimpleSetPredicate - PMML simple set predicate 
+// SimpleSetPredicate - PMML simple set predicate
 type SimpleSetPredicate struct {
 	Field    string `xml:"field,attr"`
 	Operator string `xml:"booleanOperator,attr"`
