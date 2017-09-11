@@ -8,21 +8,15 @@ import (
 
 type truePredicate struct{}
 
-// Node - PMML tree after unmarshal
+// Node - PMML tree
 type Node struct {
 	XMLName            xml.Name
-	Attrs              []xml.Attr         `xml:"-"`
+	Attrs              []xml.Attr         `xml:",any,attr"`
 	Content            []byte             `xml:",innerxml"`
 	Nodes              []Node             `xml:",any"`
 	True               truePredicate      `xml:"True"`
 	SimplePredicate    SimplePredicate    `xml:"SimplePredicate"`
 	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate"`
-}
-
-func (n *Node) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-	n.Attrs = start.Attr
-	type node Node
-	return d.DecodeElement((*node)(n), &start)
 }
 
 func GenerateTree(data []byte, n *Node) {
