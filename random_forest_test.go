@@ -1,9 +1,9 @@
 package goscore_test
 
 import (
-	"testing"
-	"github.com/asafschers/goscore"
 	"encoding/xml"
+	"github.com/asafschers/goscore"
+	"testing"
 )
 
 const randomForestXml = `
@@ -9124,7 +9124,7 @@ var RandomForestTests = []struct {
 		"SibSp":    "0",
 		"Embarked": "Q",
 	},
-		2.0/15.0,
+		2.0 / 15.0,
 	},
 	{map[string]string{
 		"Sex":      "female",
@@ -9135,7 +9135,7 @@ var RandomForestTests = []struct {
 		"SibSp":    "1",
 		"Embarked": "C",
 	},
-		14.0/15.0,
+		14.0 / 15.0,
 	},
 }
 
