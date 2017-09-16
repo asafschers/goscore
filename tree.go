@@ -6,6 +6,7 @@ import (
 )
 
 type truePredicate struct{}
+type dummyMiningSchema struct{}
 
 // Node - PMML tree
 type Node struct {
@@ -14,12 +15,13 @@ type Node struct {
 	Content            []byte             `xml:",innerxml"`
 	Nodes              []Node             `xml:",any"`
 	True               truePredicate      `xml:"True"`
+	DummyMiningSchema  dummyMiningSchema  `xml:"MiningSchema"`
 	SimplePredicate    SimplePredicate    `xml:"SimplePredicate"`
 	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate"`
 }
 
 // TraverseTree - traverses Node predicates with features as input and returns score by terminal node
-func TraverseTree(n Node, features map[string]string) (score float64) {
+func (n Node) TraverseTree(features map[string]string) (score float64) {
 	curr := n.Nodes[0]
 	for len(curr.Nodes) > 0 {
 		prevID := curr.Attrs[0].Value
