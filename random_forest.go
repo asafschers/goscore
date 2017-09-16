@@ -11,6 +11,8 @@ type RandomForest struct {
 	Trees   []Node `xml:"MiningModel>Segmentation>Segment>TreeModel"`
 }
 
+// LabelScores - traverses all trees in RandomForest with features and maps result
+//               labels to how many trees returned those label
 func (rf RandomForest) LabelScores(features map[string]string) map[string]float64 {
 	scores := map[string]float64{}
 	for _, tree := range rf.Trees {
@@ -20,13 +22,15 @@ func (rf RandomForest) LabelScores(features map[string]string) map[string]float6
 	return scores
 }
 
+// Score - traverses all trees in RandomForest with features and returns ratio of
+//         given label results count to all results count
 func (rf RandomForest) Score(features map[string]string, label string) float64 {
 	labelScores := rf.LabelScores(features)
 
-	all_count := 0.0
+	allCount := 0.0
 	for _, value := range labelScores {
-		all_count += value
+		allCount += value
 	}
 
-	return labelScores[label] / all_count
+	return labelScores[label] / allCount
 }
