@@ -9112,6 +9112,34 @@ const randomForestXml = `
 </PMML>
 `
 
+var RandomForestTests = []struct {
+	features map[string]string
+	score    float64
+}{
+	{map[string]string{
+		"Sex":      "male",
+		"Parch":    "0",
+		"Age":      "30",
+		"Fare":     "9.6875",
+		"Pclass":   "2",
+		"SibSp":    "0",
+		"Embarked": "Q",
+	},
+		3,
+	},
+	{map[string]string{
+		"Sex":      "female",
+		"Parch":    "0",
+		"Age":      "38",
+		"Fare":     "71.2833",
+		"Pclass":   "2",
+		"SibSp":    "1",
+		"Embarked": "C",
+	},
+		4,
+	},
+}
+
 func TestRandomForest(t *testing.T) {
 	randomForest := []byte(randomForestXml)
 	var rf goscore.RandomForest
@@ -9120,15 +9148,16 @@ func TestRandomForest(t *testing.T) {
 		panic(err)
 	}
 
-	fmt.Println(len(rf.Trees))
-	fmt.Println(rf.Trees[0].Attrs)
+	//fmt.Println(len(rf.Trees))
+	//fmt.Println(rf.Trees[0].Attrs)
 
-	//for _, tt := range TreeTests {
-	//	actual := goscore.TraverseTree(n, tt.features)
-	//	if actual != tt.score {
-	//		t.Errorf("expected %f, actual %f",
-	//			tt.score,
-	//			actual)
-	//	}
-	//}
+	for _, tt := range RandomForestTests {
+		actual := rf.Score(tt.features)
+		fmt.Println(actual)
+		//if actual != tt.score {
+		//	t.Errorf("expected %f, actual %f",
+		//		tt.score,
+		//		actual)
+		//}
+	}
 }
