@@ -6,7 +6,7 @@
 
 Go scoring API for Predictive Model Markup Language (PMML).
 
-Currently supports decision trees.
+Currently supports Decision Tree and Random Forest
 
 Will be happy to implement new models by demand, or assist with any other issue.
 
