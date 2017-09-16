@@ -4,7 +4,6 @@ import (
 	"testing"
 	"github.com/asafschers/goscore"
 	"encoding/xml"
-	"fmt"
 )
 
 const randomForestXml = `
@@ -9125,7 +9124,7 @@ var RandomForestTests = []struct {
 		"SibSp":    "0",
 		"Embarked": "Q",
 	},
-		3,
+		2.0/15.0,
 	},
 	{map[string]string{
 		"Sex":      "female",
@@ -9136,7 +9135,7 @@ var RandomForestTests = []struct {
 		"SibSp":    "1",
 		"Embarked": "C",
 	},
-		4,
+		14.0/15.0,
 	},
 }
 
@@ -9148,16 +9147,12 @@ func TestRandomForest(t *testing.T) {
 		panic(err)
 	}
 
-	//fmt.Println(len(rf.Trees))
-	//fmt.Println(rf.Trees[0].Attrs)
-
 	for _, tt := range RandomForestTests {
-		actual := rf.Score(tt.features)
-		fmt.Println(actual)
-		//if actual != tt.score {
-		//	t.Errorf("expected %f, actual %f",
-		//		tt.score,
-		//		actual)
-		//}
+		actual := rf.Score(tt.features, "1")
+		if actual != tt.score {
+			t.Errorf("expected %f, actual %f",
+				tt.score,
+				actual)
+		}
 	}
 }
