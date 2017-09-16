@@ -8,7 +8,7 @@ import (
 type truePredicate struct{}
 type dummyMiningSchema struct{}
 
-// Node - PMML tree
+// Node - PMML tree node
 type Node struct {
 	XMLName            xml.Name
 	Attrs              []xml.Attr         `xml:",any,attr"`
@@ -20,7 +20,7 @@ type Node struct {
 	SimpleSetPredicate SimpleSetPredicate `xml:"SimpleSetPredicate"`
 }
 
-// TraverseTree - traverses Node predicates with features as input and returns score by terminal node
+// TraverseTree - traverses Node predicates with features and returns score by terminal node
 func (n Node) TraverseTree(features map[string]string) (score float64) {
 	curr := n.Nodes[0]
 	for len(curr.Nodes) > 0 {

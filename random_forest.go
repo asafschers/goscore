@@ -12,7 +12,7 @@ type RandomForest struct {
 }
 
 // LabelScores - traverses all trees in RandomForest with features and maps result
-//               labels to how many trees returned those label
+// labels to how many trees returned those label
 func (rf RandomForest) LabelScores(features map[string]string) map[string]float64 {
 	scores := map[string]float64{}
 	for _, tree := range rf.Trees {
@@ -23,7 +23,7 @@ func (rf RandomForest) LabelScores(features map[string]string) map[string]float6
 }
 
 // Score - traverses all trees in RandomForest with features and returns ratio of
-//         given label results count to all results count
+// given label results count to all results count
 func (rf RandomForest) Score(features map[string]string, label string) float64 {
 	labelScores := rf.LabelScores(features)
 
