@@ -3,8 +3,8 @@ package goscore_test
 import (
 	"encoding/xml"
 	"github.com/asafschers/goscore"
-	"testing"
 	"io/ioutil"
+	"testing"
 )
 
 var TreeTests = []struct {
