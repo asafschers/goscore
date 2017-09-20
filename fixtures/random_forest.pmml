@@ -1,13 +1,4 @@
-package goscore_test
-
-        import (
-        "encoding/xml"
-        "github.com/asafschers/goscore"
-        "testing"
-        )
-
-        const randomForestXml = `
-        <?xml version="1.0"?>
+<?xml version="1.0"?>
 <PMML version="4.3" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_3 http://www.dmg.org/pmml/v4-3/pmml-4-3.xsd">
     <Header copyright="Copyright (c) 2017 asafschers1" description="Random Forest Tree Model">
         <Extension name="user" value="asafschers1" extender="Rattle/PMML"/>

@@ -1,4 +1,10 @@
 <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+    <MiningSchema>
+        <MiningField name="f1"/>
+        <MiningField name="f2"/>
+        <MiningField name="f3"/>
+        <MiningField name="f4"/>
+    </MiningSchema>
     <Node id="1">
         <True/>
         <Node id="13" score="4.3463944950723456E-4">

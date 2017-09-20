@@ -65,7 +65,6 @@ var TreeTests = []struct {
 }
 
 // TODO: test score distribution
-// TODO: restore mining schema to pmml
 
 func TestTree(t *testing.T) {
 	treeXml, err := ioutil.ReadFile("fixtures/tree.pmml")
