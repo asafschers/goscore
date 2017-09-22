@@ -13,8 +13,14 @@ type SimplePredicate struct {
 
 // True - Evaluates to true if features input is true for SimplePredicate
 func (p SimplePredicate) True(features map[string]string) bool {
-	predicateValue, _ := strconv.ParseFloat(p.Value, 64)
+	predicateValue, err := strconv.ParseFloat(p.Value, 64)
 	featureValue, _ := strconv.ParseFloat(features[p.Field], 64)
+
+	if err != nil { // predicate not numerical
+		if p.Operator == "equal" {
+			return p.Value == features[p.Field]
+		}
+	}
 
 	if p.Operator == "equal" {
 		return featureValue == predicateValue
