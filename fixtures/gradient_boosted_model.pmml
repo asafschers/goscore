@@ -1,0 +1,2058 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML version="4.3">
+    <Header>
+        <Application name="JPMML-R" version="1.2.16"/>
+        <Timestamp>2017-06-24T20:16:48Z</Timestamp>
+    </Header>
+    <DataDictionary>
+        <DataField name="Survived" optype="categorical" dataType="string">
+            <Value value="0"/>
+            <Value value="1"/>
+        </DataField>
+        <DataField name="Sex" optype="categorical" dataType="string">
+            <Value value="female"/>
+            <Value value="male"/>
+        </DataField>
+    </DataDictionary>
+    <MiningModel functionName="classification">
+        <MiningSchema>
+            <MiningField name="Survived" usageType="target"/>
+            <MiningField name="Sex"/>
+        </MiningSchema>
+        <Segmentation multipleModelMethod="modelChain">
+            <Segment id="1">
+                <True/>
+                <MiningModel functionName="regression">
+                    <MiningSchema>
+                        <MiningField name="Sex"/>
+                    </MiningSchema>
+                    <Output>
+                        <OutputField name="gbmValue" optype="continuous" dataType="double" feature="predictedValue" isFinalResult="false"/>
+                    </Output>
+                    <Targets>
+                        <Target a="3" rescaleConstant="-0.4732877044469254"/>
+                    </Targets>
+                    <Segmentation multipleModelMethod="sum">
+                        <Segment id="1">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="4.933156246668192E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-9.157406526057804E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0017029004187798641">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="2">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.0593744218357415E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.88684221400772E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016095485514608788">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="3">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-8.404326324501574E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.119107291712319E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001381711045471682">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="4">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.895799975503864E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.399908906555069E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014678578751578229">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="5">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.8803987085430733E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-9.568699137391099E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001484295801821634">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="6">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-9.115784218711283E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.441526977592647E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015378436261224422">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="7">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-8.854342614212497E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.703812080910868E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001633019182952949">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="8">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="6.606777613142382E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.485131266919474E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014753427123043727">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="9">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.0427921346991353E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.436916772203476E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001858701745932523">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="10">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-6.733749616691258E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.469999396583879E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014059207574436024">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="11">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.969283032546058E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.060473638392145E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001380520784348257">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="12">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="4.504446350420812E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.831562503653983E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015754706405392142">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="13">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.884670951941217E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.040731656248062E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013925005138974182">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="14">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.6070650461033375E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.05896151363334E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001344881654921408">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="15">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.153686524390658E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.219360675875169E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013766913709489434">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="16">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.104950561114058E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.11969187974028E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013599636785977525">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="17">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.1641273028480971E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-9.36894261506196E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014810811119608032">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="18">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.144376871315431E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.927914712621971E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013115546631124863">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="19">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.919123577349589E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.475613500858452E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015553475599757677">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="20">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.1717019294000637E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.203654615324857E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001429304774340116">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="21">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.1490533590526064E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.714640116933885E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015425111370371593">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="22">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.8210100801893168E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.769518262715508E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013475705774868342">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="23">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.0815600175786703E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.991666933520892E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001401485318147446">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="24">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.329110054254831E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.558342754350504E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013488263158207673">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="25">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="7.141154378878804E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.581766235862988E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016082768025798145">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="26">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.2894418532614857E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.044517644068404E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014106644866514202">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="27">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-7.054072003712218E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.120563458193483E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013588282165036163">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="28">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="4.209769510308948E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.081124034866462E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013526499043678747">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="29">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.456782855152862E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.774816915232885E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015836676281197096">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="30">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.2848643782912226E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.10291743194594E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016288363634171842">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="31">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.0467444844601786E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.731394646230524E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001459015914324012">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="32">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-8.194986351113854E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.07149292901748E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012353427708882596">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="33">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="7.7249880126744E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.307396667123373E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016946062604338574">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="34">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-7.042329079464199E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.864176698658928E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0011532970864207288">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="35">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.498257612427884E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.090040335914781E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012622277477227421">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="36">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.0332651407074212E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-9.506760975945034E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001420836887739294">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="37">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.1620698217361103E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-5.969565499295156E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013620420413414187">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="38">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-8.238040537378126E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.025290616943438E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001292020951787031">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="39">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="5.676882567646704E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.461615356331144E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001393383439113974">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="40">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.9831814306884155E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.575182926511482E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001561571887716985">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="41">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.925526276940368E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.62278705523786E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016558835863295703">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="42">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.7696529014596682E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.47390157572508E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013304024661097908">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="43">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.1189134053235107E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.440176652458274E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014669496090178754">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="44">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.7027458826629E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.40064817886005E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014515041742011528">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="45">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.7105141737316236E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.726562880226422E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0011929008730697658">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="46">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.864691131347209E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.548639177238556E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001547449015994183">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="47">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.7894735689727092E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.025215210227956E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014803190052898897">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="48">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="8.72647773532453E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.282790772355893E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0016221648172516255">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="49">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.760427362640247E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.607753038355211E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015026370314583887">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="50">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.4685129660458338E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.432559456872782E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015398676693506095">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="51">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.691462057668107E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.565734627215899E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014783765184818113">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="52">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.2492845587115724E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.741611171749627E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012630730769288415">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="53">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.3205160321082688E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.715580092715961E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001397961650708006">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="54">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.6521472392997768E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.795462431410239E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012720073805399677">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="55">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="5.5626300457457765E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.374471248244784E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015368525012340645">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="56">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.8571692338986934E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.29939163727285E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015055462788867485">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="57">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.8144252698126107E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.78493420016069E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0011488768244315745">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="58">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.3167491491644965E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.726551387477344E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001420028109879345">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="59">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.144403132409906E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.426924662917456E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014576659437766587">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="60">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.552747339357761E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.83933563337835E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013368444725264182">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="61">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-6.295895865365557E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.450239091824903E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012641815634558825">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="62">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.1198456309819569E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.596431438830396E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014889902626977016">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="63">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-6.559350810309988E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.165812225197997E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012540958721429989">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="64">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.372687725902179E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.490703137613235E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014619349680445636">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="65">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="4.023865204943808E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.010599087856905E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014664228723904628">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="66">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="6.0874472531976845E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.616142595081101E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012987972390152967">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="67">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="5.14491869432496E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.609089373250423E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015563946863889956">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="68">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.1962084184869801E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-9.085358053363588E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001341894699484212">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="69">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-6.901826069456688E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.90980260597749E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013508403391150248">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="70">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.7390700658911734E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.94072876831845E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013166692408861252">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="71">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="6.807026817308121E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.437483099165214E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015000980705174734">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="72">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.6272482753909896E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.96802847536197E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014015263444139155">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="73">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="8.949899454527532E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-5.915021322134794E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.001290768062865066">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="74">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.261876507007655E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.651976959986406E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0015261639064561249">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="75">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.18991813371688E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.470151262538472E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012615991301612299">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="76">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.047114223136958E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.832511620642562E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014502221860565284">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="77">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-2.6874280882729826E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.115339195583212E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014125013620381003">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="78">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="8.94524672772736E-6">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.791817413992194E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013724532875363101">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="79">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.619294535452479E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.330259770080179E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014695110300426604">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="80">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.075125925882754E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.052457003338844E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013808603316327196">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="81">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.2854938837990936E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.590493631266098E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013226451923249451">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="82">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-6.231596358381168E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.174317258765242E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014530176945306184">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="83">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-4.7827506536156255E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.525083981546751E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014282750207640564">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="84">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.7185512661703225E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.343233157196345E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013544508764371972">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="85">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.2468005607361333E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.382772349653901E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014301493518514173">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="86">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-3.0423838187501716E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.454339230846007E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014355691447091668">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="87">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.6293167797022206E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.06633954767421E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012753121755669497">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="88">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.4908737686163301E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.411703269474833E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014425216137368912">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="89">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-8.014589471285388E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.985215407806662E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0010819323562791955">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="90">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="3.476967532309007E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.196473116112998E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013149924410299333">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="91">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.3399149323676843E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.549901556943538E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0011502873742658055">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="92">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="2.623251105851491E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.485861522264332E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014063782550348286">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="93">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-5.58384566181614E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.294087316236242E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0011376699676759812">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="94">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-9.519397739017838E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.158016803834212E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0012266851210942416">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="95">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.6202032451307323E-4">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-8.227399755102488E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013233931974367815">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="96">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="6.005463086044291E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.405729181628279E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013928358202524745">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="97">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="7.323254647969311E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.031190518466264E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014696888805760917">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="98">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="8.232240229397242E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-6.84356154978396E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014479685824353788">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="99">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="1.7117660348001502E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.586541776076382E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0014685617442650048">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                        <Segment id="100">
+                            <True/>
+                            <TreeModel functionName="regression" splitCharacteristic="multiSplit">
+                                <MiningSchema>
+                                    <MiningField name="Sex"/>
+                                </MiningSchema>
+                                <Node id="1">
+                                    <True/>
+                                    <Node id="4" score="-1.3644644284642922E-5">
+                                        <SimplePredicate field="Sex" operator="isMissing"/>
+                                    </Node>
+                                    <Node id="2" score="-7.711400662955454E-4">
+                                        <SimplePredicate field="Sex" operator="equal" value="male"/>
+                                    </Node>
+                                    <Node id="3" score="0.0013225584603805513">
+                                        <SimplePredicate field="Sex" operator="equal" value="female"/>
+                                    </Node>
+                                </Node>
+                            </TreeModel>
+                        </Segment>
+                    </Segmentation>
+                </MiningModel>
+            </Segment>
+            <Segment id="2">
+                <True/>
+                <RegressionModel functionName="classification" normalizationMethod="softmax">
+                    <MiningSchema>
+                        <MiningField name="Survived" usageType="target"/>
+                        <MiningField name="gbmValue"/>
+                    </MiningSchema>
+                    <Output>
+                        <OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+                        <OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+                    </Output>
+                    <RegressionTable intercept="0.0" targetCategory="1">
+                        <NumericPredictor name="gbmValue" coefficient="1.0"/>
+                    </RegressionTable>
+                    <RegressionTable intercept="0.0" targetCategory="0"/>
+                </RegressionModel>
+            </Segment>
+        </Segmentation>
+    </MiningModel>
+</PMML>
