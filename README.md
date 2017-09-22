@@ -6,7 +6,7 @@
 
 Go scoring API for Predictive Model Markup Language (PMML).
 
-Currently supports Decision Tree and Random Forest
+Currently supports Decision Tree, Random Forest and Gradient Boosted Models
 
 Will be happy to implement new models by demand, or assist with any other issue.
 
@@ -16,6 +16,22 @@ Contact me here or at aschers@gmail.com.
 
 ```
 go get github.com/asafschers/goscore
+```
+## Usage
+
+### Random Forest / Gradient Boosted Model
+
+[Generate PMML - R](https://github.com/asafschers/scoruby/wiki) 
+
+Score by PMML -
+
+```go
+
+modelXml, _ := ioutil.ReadFile("fixtures/model.pmml")
+var model goscore.RandomForest // or goscore.GradientBoostedModel
+xml.Unmarshal([]byte(modelXml), &model)
+score, _ := model.Score(tt.features, "1") // gbm.score doesn't recieve label
+
 ```
 
 ## Contributing
