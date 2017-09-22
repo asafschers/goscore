@@ -21,7 +21,7 @@ func (rf RandomForest) LabelScores(features map[string]string) (map[string]float
 			return scores, err
 		}
 		scoreString := strconv.FormatFloat(score, 'f', -1, 64)
-		scores[scoreString] += 1
+		scores[scoreString]++
 	}
 	return scores, nil
 }
