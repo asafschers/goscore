@@ -15,8 +15,8 @@ type SimplePredicate struct {
 func (p SimplePredicate) True(features map[string]interface{}) bool {
 
 	if p.Operator == "isMissing" {
-		_, exists := features[p.Field]
-		return !exists
+		featureValue, exists := features[p.Field]
+		return featureValue == nil || !exists
 	}
 
 	switch featureValue := features[p.Field].(type) {

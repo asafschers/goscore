@@ -26,6 +26,9 @@ var simplePredicateTests = []struct {
 	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
 		map[string]interface{}{},
 		true},
+	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
+		map[string]interface{}{"f33": nil},
+		true},
 }
 
 func TestSimplePredicate(t *testing.T) {
