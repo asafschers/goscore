@@ -33,7 +33,7 @@ func (n Node) TraverseTree(features map[string]interface{}) (score float64, err 
 	}
 
 	if len(curr.Attrs) < 2 {
-		return -1, errors.New("Terminal node without score")
+		return -1, errors.New("Terminal node without score, Node id: " + curr.Attrs[0].Value)
 	}
 	return strconv.ParseFloat(curr.Attrs[1].Value, 64)
 }

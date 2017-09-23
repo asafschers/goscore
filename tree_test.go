@@ -60,7 +60,7 @@ var TreeTests = []struct {
 	{
 		map[string]interface{}{"f1": "f1v3", "f2": "f2v1", "f3": "f3v7", "f4": 0.09},
 		-1,
-		errors.New("Terminal node without score"),
+		errors.New("Terminal node without score, Node id: 5"),
 	},
 }
 

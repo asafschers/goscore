@@ -47,7 +47,7 @@ var RandomForestTests = []struct {
 		"Embarked": "UnknownCategory",
 	},
 		-1,
-		errors.New("Terminal node without score"),
+		errors.New("Terminal node without score, Node id: 1"),
 	},
 }
 
