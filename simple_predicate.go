@@ -28,6 +28,11 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 		if p.Operator == "equal" {
 			return p.Value == features[p.Field]
 		}
+	case bool:
+		if p.Operator == "equal" {
+			predicateBool, _ := strconv.ParseBool(p.Value)
+			return predicateBool == features[p.Field]
+		}
 	}
 
 	return false
