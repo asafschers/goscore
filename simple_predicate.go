@@ -12,15 +12,29 @@ type SimplePredicate struct {
 }
 
 // True - Evaluates to true if features input is true for SimplePredicate
-func (p SimplePredicate) True(features map[string]string) bool {
-	predicateValue, err := strconv.ParseFloat(p.Value, 64)
-	featureValue, _ := strconv.ParseFloat(features[p.Field], 64)
+func (p SimplePredicate) True(features map[string]interface{}) bool {
 
-	if err != nil { // predicate not numerical
+	if p.Operator == "isMissing" {
+		_, exists := features[p.Field]
+		return !exists
+	}
+
+	switch featureValue := features[p.Field].(type) {
+	case int:
+		return numericTrue(p, float64(featureValue))
+	case float64:
+		return numericTrue(p, featureValue)
+	case string:
 		if p.Operator == "equal" {
 			return p.Value == features[p.Field]
 		}
 	}
+
+	return false
+}
+
+func numericTrue(p SimplePredicate, featureValue float64) bool {
+	predicateValue, _ := strconv.ParseFloat(p.Value, 64)
 
 	if p.Operator == "equal" {
 		return featureValue == predicateValue
@@ -32,9 +46,6 @@ func (p SimplePredicate) True(features map[string]string) bool {
 		return featureValue > predicateValue
 	} else if p.Operator == "greaterOrEqual" {
 		return featureValue >= predicateValue
-	} else if p.Operator == "isMissing" {
-		_, exists := features[p.Field]
-		return !exists
 	}
 	return false
 }

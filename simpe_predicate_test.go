@@ -8,23 +8,23 @@ import (
 
 var simplePredicateTests = []struct {
 	predicate []byte
-	features  map[string]string
+	features  map[string]interface{}
 	expected  bool
 }{
 	{[]byte(`<SimplePredicate field="f33" operator="equal" value="18.85"/>`),
-		map[string]string{"f33": "18.850"},
+		map[string]interface{}{"f33": 18.850},
 		true},
 	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
-		map[string]string{"f33": "18.84"},
+		map[string]interface{}{"f33": 18.84},
 		true},
 	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
-		map[string]string{"f33": "18.86"},
+		map[string]interface{}{"f33": 18.86},
 		false},
 	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
-		map[string]string{"f33": "18.86"},
+		map[string]interface{}{"f33": 18.86},
 		false},
 	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
-		map[string]string{},
+		map[string]interface{}{},
 		true},
 }
 

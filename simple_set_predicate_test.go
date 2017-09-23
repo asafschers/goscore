@@ -15,20 +15,20 @@ const simpleSetPredicate2 = `<SimpleSetPredicate field="f2" booleanOperator="isI
 
 var simpleSetPredicateTests = []struct {
 	predicate []byte
-	features  map[string]string
+	features  map[string]interface{}
 	expected  bool
 }{
 	{[]byte(simpleSetPredicate1),
-		map[string]string{"f1": "v3"},
+		map[string]interface{}{"f1": "v3"},
 		true},
 	{[]byte(simpleSetPredicate1),
-		map[string]string{"f1": "v4"},
+		map[string]interface{}{"f1": "v4"},
 		false},
 	{[]byte(simpleSetPredicate2),
-		map[string]string{"f2": "No Match"},
+		map[string]interface{}{"f2": "No Match"},
 		true},
 	{[]byte(simpleSetPredicate2),
-		map[string]string{"f2": "Match"},
+		map[string]interface{}{"f2": "Match"},
 		false},
 }
 

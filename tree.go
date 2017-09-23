@@ -22,7 +22,7 @@ type Node struct {
 }
 
 // TraverseTree - traverses Node predicates with features and returns score by terminal node
-func (n Node) TraverseTree(features map[string]string) (score float64, err error) {
+func (n Node) TraverseTree(features map[string]interface{}) (score float64, err error) {
 	curr := n.Nodes[0]
 	for len(curr.Nodes) > 0 {
 		prevID := curr.Attrs[0].Value
@@ -38,7 +38,7 @@ func (n Node) TraverseTree(features map[string]string) (score float64, err error
 	return strconv.ParseFloat(curr.Attrs[1].Value, 64)
 }
 
-func step(curr Node, features map[string]string) Node {
+func step(curr Node, features map[string]interface{}) Node {
 	for _, node := range curr.Nodes {
 		if node.XMLName.Local == "True" || node.SimplePredicate.True(features) || node.SimpleSetPredicate.True(features) {
 			curr = node

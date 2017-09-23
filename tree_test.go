@@ -9,56 +9,56 @@ import (
 )
 
 var TreeTests = []struct {
-	features map[string]string
+	features map[string]interface{}
 	score    float64
 	err      error
 }{
-	{map[string]string{},
+	{map[string]interface{}{},
 		4.3463944950723456E-4,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1"},
+		map[string]interface{}{"f2": "f2v1"},
 		-1.8361380219689046E-4,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v3"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v3"},
 		-6.237581139073701E-4,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.08"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v3", "f4": 0.08},
 		0.0021968294712358194,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.09"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v3", "f4": 0.09},
 		-9.198573460887271E-4,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.09", "f3": "f3v2"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v3", "f4": 0.09, "f3": "f3v2"},
 		-0.0021187239505556523,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v3", "f4": "0.09", "f3": "f3v4"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v3", "f4": 0.09, "f3": "f3v4"},
 		-3.3516227414227926E-4,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v1", "f1": "f1v4"},
+		map[string]interface{}{"f2": "f2v1", "f1": "f1v4"},
 		0.0011015286521365208,
 		nil,
 	},
 	{
-		map[string]string{"f2": "f2v4"},
+		map[string]interface{}{"f2": "f2v4"},
 		0.0022726641744997256,
 		nil,
 	},
 	{
-		map[string]string{"f1": "f1v3", "f2": "f2v1", "f3": "f3v7", "f4": "0.09"},
+		map[string]interface{}{"f1": "f1v3", "f2": "f2v1", "f3": "f3v7", "f4": 0.09},
 		-1,
 		errors.New("Terminal node without score"),
 	},
@@ -79,10 +79,15 @@ func TestTree(t *testing.T) {
 	for _, tt := range TreeTests {
 		actual, err := n.TraverseTree(tt.features)
 
-		if err != nil && err.Error() != tt.err.Error() {
-			t.Errorf("expected error %s, actual %s",
-				tt.err.Error(),
-				err)
+		if err != nil {
+			if tt.err == nil {
+				t.Errorf("expected no error, actual: %s",
+					err)
+			} else if tt.err.Error() != err.Error() {
+				t.Errorf("expected error %s, actual: %s",
+					tt.err.Error(),
+					err)
+			}
 		}
 
 		if actual != tt.score {

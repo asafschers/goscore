@@ -9,27 +9,27 @@ import (
 )
 
 var GradientBoostedModelTests = []struct {
-	features map[string]string
+	features map[string]interface{}
 	score    float64
 }{
-	{map[string]string{
+	{map[string]interface{}{
 		"Sex":      "male",
-		"Parch":    "0",
-		"Age":      "30",
-		"Fare":     "9.6875",
-		"Pclass":   "2",
-		"SibSp":    "0",
+		"Parch":    0,
+		"Age":      30,
+		"Fare":     9.6875,
+		"Pclass":   2,
+		"SibSp":    0,
 		"Embarked": "Q",
 	},
 		0.3652639329522468,
 	},
-	{map[string]string{
+	{map[string]interface{}{
 		"Sex":      "female",
-		"Parch":    "0",
-		"Age":      "38",
-		"Fare":     "71.2833",
-		"Pclass":   "2",
-		"SibSp":    "1",
+		"Parch":    0,
+		"Age":      38,
+		"Fare":     71.2833,
+		"Pclass":   2,
+		"SibSp":    1,
 		"Embarked": "C",
 	},
 		0.4178155014037758,
