@@ -23,17 +23,22 @@ go get github.com/asafschers/goscore
 
 [Generate PMML - R](https://github.com/asafschers/scoruby/wiki) 
 
-Score by PMML -
-
+Fetch model from PMML file -
 ```go
-
 modelXml, _ := ioutil.ReadFile("fixtures/model.pmml")
 var model goscore.RandomForest // or goscore.GradientBoostedModel
 xml.Unmarshal([]byte(modelXml), &model)
-var features map[string]interface{}
-json.Unmarshal([]byte(featuresJson), &features) 
-score, _ := model.Score(features, "1") // gbm.score doesn't recieve label
+```
 
+Fetch features from JSON string -
+```go
+var features map[string]interface{}
+json.Unmarshal([]byte(featuresJson), &features)
+```
+
+Score features by model -
+```go
+score, _ := model.Score(features, "1") // gbm.score doesn't recieve label
 ```
 
 ## Contributing
