@@ -45,8 +45,7 @@ func TestGradientBoostedModel(t *testing.T) {
 	}
 
 	var gbm goscore.GradientBoostedModel
-	GradientBoostedModel := []byte(GradientBoostedModelXml)
-	err = xml.Unmarshal(GradientBoostedModel, &gbm)
+	err = xml.Unmarshal([]byte(GradientBoostedModelXml), &gbm)
 	if err != nil {
 		panic(err)
 	}

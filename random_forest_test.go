@@ -58,8 +58,7 @@ func TestRandomForest(t *testing.T) {
 	}
 
 	var rf goscore.RandomForest
-	randomForest := []byte(randomForestXml)
-	err = xml.Unmarshal(randomForest, &rf)
+	err = xml.Unmarshal([]byte(randomForestXml), &rf)
 	if err != nil {
 		panic(err)
 	}
