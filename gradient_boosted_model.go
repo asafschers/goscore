@@ -3,6 +3,7 @@ package goscore
 import (
 	"encoding/xml"
 	"math"
+	"sync"
 )
 
 // GradientBoostedModel - GradientBoostedModel PMML
@@ -21,7 +22,6 @@ type target struct {
 // Score - traverses all trees in GradientBoostedModel with features and returns exp(sum) / (1 + exp(sum))
 // where sum is sum of trees + rescale constant
 func (gbm GradientBoostedModel) Score(features map[string]interface{}) (float64, error) {
-
 	sum := fetchConst(gbm)
 
 	for _, tree := range gbm.Trees {
@@ -33,6 +33,35 @@ func (gbm GradientBoostedModel) Score(features map[string]interface{}) (float64,
 	}
 	return math.Exp(sum) / (1 + math.Exp(sum)), nil
 }
+
+// ScoreConcurrently - same as Score but concurrent
+func (gbm GradientBoostedModel) ScoreConcurrently(features map[string]interface{}) (float64, error) {
+	sum := fetchConst(gbm)
+	messages := make(chan float64, len(gbm.Trees))
+
+	var wg sync.WaitGroup
+	wg.Add(len(gbm.Trees))
+
+	for _, tree := range gbm.Trees {
+		go func(tree Node, features map[string]interface{}) {
+
+			treeScore, err := tree.TraverseTree(features)
+
+			if err != nil {
+				panic(err)
+			}
+			messages <- treeScore
+			wg.Done()
+		}(tree, features)
+	}
+	wg.Wait()
+
+	for i := 0; i < len(gbm.Trees); i++ {
+		sum += <-messages
+	}
+	return math.Exp(sum) / (1 + math.Exp(sum)), nil
+}
+
 func fetchConst(gbm GradientBoostedModel) (sum float64) {
 	if gbm.Version == "4.2" {
 		sum = gbm.Constant

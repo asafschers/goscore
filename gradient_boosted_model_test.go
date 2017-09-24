@@ -63,5 +63,14 @@ func TestGradientBoostedModel(t *testing.T) {
 				tt.score,
 				actual)
 		}
+
+		actual, _ = gbm.ScoreConcurrently(tt.features)
+
+		if diff := math.Abs(actual - tt.score); diff > TOLERANCE {
+			t.Errorf("expected %f, actual %f",
+				tt.score,
+				actual)
+		}
+
 	}
 }
