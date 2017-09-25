@@ -27,11 +27,9 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 	case string:
 		if p.Operator == "equal" {
 			return p.Value == features[p.Field]
-		} else {
-			numericFeatureValue, err := strconv.ParseFloat(featureValue, 64)
-			if err != nil {
-				return false
-			}
+		}
+		numericFeatureValue, err := strconv.ParseFloat(featureValue, 64)
+		if err == nil {
 			return numericTrue(p, numericFeatureValue)
 		}
 	case bool:
