@@ -16,7 +16,7 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 
 	if p.Operator == "isMissing" {
 		featureValue, exists := features[p.Field]
-		return featureValue == nil || !exists
+		return featureValue == "" || featureValue == nil || !exists
 	}
 
 	switch featureValue := features[p.Field].(type) {
