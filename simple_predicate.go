@@ -1,14 +1,29 @@
 package goscore
 
 import (
+	"encoding/xml"
 	"strconv"
 )
 
 // SimplePredicate - PMML simple predicate
 type SimplePredicate struct {
-	Field    string `xml:"field,attr"`
-	Operator string `xml:"operator,attr"`
-	Value    string `xml:"value,attr"`
+	Field    string      `xml:"field,attr"`
+	Operator string      `xml:"operator,attr"`
+	Value    customValue `xml:"value,attr"`
+}
+
+type customValue struct {
+	NumValue    float64
+	StringValue string
+}
+
+func (cv *customValue) UnmarshalXMLAttr(attr xml.Attr) error {
+	var err error
+	cv.NumValue, err = strconv.ParseFloat(attr.Value, 64)
+	if err != nil {
+		cv.StringValue = attr.Value
+	}
+	return nil
 }
 
 // True - Evaluates to true if features input is true for SimplePredicate
@@ -26,7 +41,7 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 		return numericTrue(p, featureValue)
 	case string:
 		if p.Operator == "equal" {
-			return p.Value == features[p.Field]
+			return p.Value.StringValue == features[p.Field]
 		}
 		numericFeatureValue, err := strconv.ParseFloat(featureValue, 64)
 		if err == nil {
@@ -34,7 +49,7 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 		}
 	case bool:
 		if p.Operator == "equal" {
-			predicateBool, _ := strconv.ParseBool(p.Value)
+			predicateBool, _ := strconv.ParseBool(p.Value.StringValue)
 			return predicateBool == features[p.Field]
 		}
 	}
@@ -43,7 +58,7 @@ func (p SimplePredicate) True(features map[string]interface{}) bool {
 }
 
 func numericTrue(p SimplePredicate, featureValue float64) bool {
-	predicateValue, _ := strconv.ParseFloat(p.Value, 64)
+	predicateValue := p.Value.NumValue
 
 	if p.Operator == "equal" {
 		return featureValue == predicateValue
