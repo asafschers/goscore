@@ -82,5 +82,24 @@ func TestRandomForest(t *testing.T) {
 				tt.score,
 				actual)
 		}
+
+		actual, err = rf.ScoreConcurrently(tt.features, "1")
+
+		if err != nil {
+			if tt.err == nil {
+				t.Errorf("expected no error, actual: %s",
+					err)
+			} else if tt.err.Error() != err.Error() {
+				t.Errorf("expected error %s, actual: %s",
+					tt.err.Error(),
+					err)
+			}
+		}
+
+		if err == nil && actual != tt.score {
+			t.Errorf("expected %f, actual %f",
+				tt.score,
+				actual)
+		}
 	}
 }
