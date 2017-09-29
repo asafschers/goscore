@@ -34,30 +34,36 @@ func (gbm GradientBoostedModel) Score(features map[string]interface{}) (float64,
 	return math.Exp(sum) / (1 + math.Exp(sum)), nil
 }
 
+type result struct {
+	ErrorName error
+	Score     float64
+}
+
 // ScoreConcurrently - same as Score but concurrent
 func (gbm GradientBoostedModel) ScoreConcurrently(features map[string]interface{}) (float64, error) {
 	sum := fetchConst(gbm)
-	messages := make(chan float64, len(gbm.Trees))
+	messages := make(chan result, len(gbm.Trees))
 
 	var wg sync.WaitGroup
 	wg.Add(len(gbm.Trees))
 
 	for _, tree := range gbm.Trees {
 		go func(tree Node, features map[string]interface{}) {
-
 			treeScore, err := tree.TraverseTree(features)
 
-			if err != nil {
-				panic(err)
-			}
-			messages <- treeScore
+			messages <- result{ErrorName: err, Score: treeScore}
 			wg.Done()
 		}(tree, features)
 	}
 	wg.Wait()
 
+	var res result
 	for i := 0; i < len(gbm.Trees); i++ {
-		sum += <-messages
+		res = <-messages
+		if res.ErrorName != nil {
+			return -1, res.ErrorName
+		}
+		sum += res.Score
 	}
 	return math.Exp(sum) / (1 + math.Exp(sum)), nil
 }
