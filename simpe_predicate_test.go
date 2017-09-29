@@ -20,6 +20,9 @@ var simplePredicateTests = []struct {
 	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
 		map[string]interface{}{"f33": 18.86},
 		false},
+	{[]byte(`<SimplePredicate field="f33" operator="lessOrEqual" value="18.85"/>`),
+		map[string]interface{}{"f33": "18.84"},
+		true},
 	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
 		map[string]interface{}{"f33": 18.86},
 		false},
@@ -28,6 +31,9 @@ var simplePredicateTests = []struct {
 		true},
 	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
 		map[string]interface{}{"f33": nil},
+		true},
+	{[]byte(`<SimplePredicate field="f33" operator="isMissing" value="18.85"/>`),
+		map[string]interface{}{"f33": ""},
 		true},
 }
 
