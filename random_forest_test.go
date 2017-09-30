@@ -6,6 +6,7 @@ import (
 	"github.com/asafschers/goscore"
 	"io/ioutil"
 	"testing"
+	"strings"
 )
 
 var RandomForestTests = []struct {
@@ -47,7 +48,7 @@ var RandomForestTests = []struct {
 		"Embarked": "UnknownCategory",
 	},
 		-1,
-		errors.New("Terminal node without score, Node id: 1"),
+		errors.New("Terminal node without score"),
 	},
 }
 
@@ -70,7 +71,7 @@ func TestRandomForest(t *testing.T) {
 			if tt.err == nil {
 				t.Errorf("expected no error, actual: %s",
 					err)
-			} else if tt.err.Error() != err.Error() {
+			} else if !strings.HasPrefix(err.Error(), tt.err.Error()) {
 				t.Errorf("expected error %s, actual: %s",
 					tt.err.Error(),
 					err)
@@ -89,7 +90,7 @@ func TestRandomForest(t *testing.T) {
 			if tt.err == nil {
 				t.Errorf("expected no error, actual: %s",
 					err)
-			} else if tt.err.Error() != err.Error() {
+			} else if !strings.HasPrefix(err.Error(), tt.err.Error()) {
 				t.Errorf("expected error %s, actual: %s",
 					tt.err.Error(),
 					err)
