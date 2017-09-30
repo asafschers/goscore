@@ -12,6 +12,21 @@ type RandomForest struct {
 	Trees   []Node `xml:"MiningModel>Segmentation>Segment>TreeModel"`
 }
 
+// Score - traverses all trees in RandomForest with features and returns ratio of
+// given label results count to all results count
+func (rf RandomForest) Score(features map[string]interface{}, label string) (float64, error) {
+	labelScores, err := rf.LabelScores(features)
+	result := scoreByLabel(labelScores, label)
+	return result, err
+}
+
+// ScoreConcurrently - same as Score but concurrent
+func (rf RandomForest) ScoreConcurrently(features map[string]interface{}, label string) (float64, error) {
+	labelScores, err := rf.LabelScoresConcurrently(features)
+	result := scoreByLabel(labelScores, label)
+	return result, err
+}
+
 // LabelScores - traverses all trees in RandomForest with features and maps result
 // labels to how many trees returned those label
 func (rf RandomForest) LabelScores(features map[string]interface{}) (map[string]float64, error) {
@@ -25,36 +40,6 @@ func (rf RandomForest) LabelScores(features map[string]interface{}) (map[string]
 		scores[scoreString]++
 	}
 	return scores, nil
-}
-
-// Score - traverses all trees in RandomForest with features and returns ratio of
-// given label results count to all results count
-func (rf RandomForest) Score(features map[string]interface{}, label string) (float64, error) {
-	labelScores, err := rf.LabelScores(features)
-
-	allCount := 0.0
-	for _, value := range labelScores {
-		allCount += value
-	}
-
-	return labelScores[label] / allCount, err
-}
-
-// ScoreConcurrently - same as Score but concurrent
-func (rf RandomForest) ScoreConcurrently(features map[string]interface{}, label string) (float64, error) {
-	labelScores, err := rf.LabelScoresConcurrently(features)
-
-	allCount := 0.0
-	for _, value := range labelScores {
-		allCount += value
-	}
-
-	return labelScores[label] / allCount, err
-}
-
-type rfResult struct {
-	ErrorName error
-	Score     string
 }
 
 // LabelScoresConcurrently - same as LabelScores but concurrent
@@ -85,4 +70,18 @@ func (rf RandomForest) LabelScoresConcurrently(features map[string]interface{}) 
 	}
 
 	return scores, nil
+}
+
+func scoreByLabel(labelScores map[string]float64, label string) float64 {
+	allCount := 0.0
+	for _, value := range labelScores {
+		allCount += value
+	}
+	result := labelScores[label] / allCount
+	return result
+}
+
+type rfResult struct {
+	ErrorName error
+	Score     string
 }
