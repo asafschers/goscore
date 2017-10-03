@@ -36,7 +36,7 @@ func (gbm GradientBoostedModel) Score(features map[string]interface{}) (float64,
 
 // ScoreConcurrently - same as Score but concurrent
 func (gbm GradientBoostedModel) ScoreConcurrently(features map[string]interface{}) (float64, error) {
-	scores := traverseConcurrently(gbm, features)
+	scores := gbm.traverseConcurrently(features)
 	sum, err := sumScores(scores, len(gbm.Trees))
 	if err != nil {
 		return -1, err
@@ -50,7 +50,7 @@ type result struct {
 	Score     float64
 }
 
-func traverseConcurrently(gbm GradientBoostedModel, features map[string]interface{}) chan result {
+func (gbm GradientBoostedModel) traverseConcurrently(features map[string]interface{}) chan result {
 	scores := make(chan result, len(gbm.Trees))
 	var wg sync.WaitGroup
 	wg.Add(len(gbm.Trees))
