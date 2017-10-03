@@ -65,7 +65,7 @@ func traverseConcurrently(gbm GradientBoostedModel, features map[string]interfac
 	return scores
 }
 
-func sumScores(messages chan result, treeCount int) (float64, error){
+func sumScores(messages chan result, treeCount int) (float64, error) {
 	sum := 0.0
 	for i := 0; i < treeCount; i++ {
 		res := <-messages
