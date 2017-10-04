@@ -44,24 +44,27 @@ func (rf RandomForest) LabelScores(features map[string]interface{}) (map[string]
 
 // LabelScoresConcurrently - same as LabelScores but concurrent
 func (rf RandomForest) LabelScoresConcurrently(features map[string]interface{}) (map[string]float64, error) {
-	messages, scores := rf.traverseConcurrently(features)
+	messages := rf.traverseConcurrently(features)
+	return aggregateScores(messages, len(rf.Trees))
+}
 
+func aggregateScores(messages chan rfResult, treeCount int) (map[string]float64, error) {
+	scores := map[string]float64{}
 	var res rfResult
-	for i := 0; i < len(rf.Trees); i++ {
+	for i := 0; i < treeCount; i++ {
 		res = <-messages
 		if res.ErrorName != nil {
 			return map[string]float64{}, res.ErrorName
 		}
 		scores[res.Score]++
 	}
-
 	return scores, nil
 }
-func (rf RandomForest) traverseConcurrently(features map[string]interface{}) (chan rfResult, map[string]float64) {
+
+func (rf RandomForest) traverseConcurrently(features map[string]interface{}) (chan rfResult) {
 	messages := make(chan rfResult, len(rf.Trees))
 	var wg sync.WaitGroup
 	wg.Add(len(rf.Trees))
-	scores := map[string]float64{}
 	for _, tree := range rf.Trees {
 		go func(tree Node, features map[string]interface{}) {
 			treeScore, err := tree.TraverseTree(features)
@@ -71,7 +74,7 @@ func (rf RandomForest) traverseConcurrently(features map[string]interface{}) (ch
 		}(tree, features)
 	}
 	wg.Wait()
-	return messages, scores
+	return messages
 }
 
 func scoreByLabel(labelScores map[string]float64, label string) float64 {
