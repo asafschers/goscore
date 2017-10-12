@@ -61,7 +61,7 @@ func aggregateScores(messages chan rfResult, treeCount int) (map[string]float64,
 	return scores, nil
 }
 
-func (rf RandomForest) traverseConcurrently(features map[string]interface{}) (chan rfResult) {
+func (rf RandomForest) traverseConcurrently(features map[string]interface{}) chan rfResult {
 	messages := make(chan rfResult, len(rf.Trees))
 	var wg sync.WaitGroup
 	wg.Add(len(rf.Trees))
