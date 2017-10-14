@@ -30,10 +30,17 @@ var model goscore.RandomForest // or goscore.GradientBoostedModel
 xml.Unmarshal([]byte(modelXml), &model)
 ```
 
-Fetch features from JSON string -
+Set features -
 ```go
-var features map[string]interface{}
-json.Unmarshal([]byte(featuresJson), &features)
+features := map[string]interface{}{
+  "Sex": "male",
+  "Parch": 0,
+  "Age": 30,
+  "Fare": 9.6875,
+  "Pclass": 2,
+  "SibSp": 0,
+  "Embarked": "Q",
+}
 ```
 
 Score features by model -
