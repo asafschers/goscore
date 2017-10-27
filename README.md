@@ -12,6 +12,8 @@ Will be happy to implement new models by demand, or assist with any other issue.
 
 Contact me here or at aschers@gmail.com.
 
+[Tutorial - Deploy Machine Learning Models from R Research to Go Production with PMML](https://medium.com/@aschers/deploy-machine-learning-models-from-r-research-to-ruby-go-production-with-pmml-b41e79445d3d)
+
 ## Installation
 
 ```
