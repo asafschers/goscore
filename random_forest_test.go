@@ -2,105 +2,89 @@ package goscore_test
 
 import (
 	"encoding/xml"
-	"errors"
 	"github.com/asafschers/goscore"
 	"io/ioutil"
 	"testing"
-	"strings"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-var RandomForestTests = []struct {
-	features map[string]interface{}
-	score    float64
-	err      error
-}{
-	{map[string]interface{}{
-		"Sex":      "male",
-		"Parch":    0,
-		"Age":      30,
-		"Fare":     9.6875,
-		"Pclass":   2,
-		"SibSp":    0,
-		"Embarked": "Q",
-	},
-		2.0 / 15.0,
-		nil,
-	},
-	{map[string]interface{}{
-		"Sex":      "female",
-		"Parch":    0,
-		"Age":      38,
-		"Fare":     71.2833,
-		"Pclass":   2,
-		"SibSp":    1,
-		"Embarked": "C",
-	},
-		14.0 / 15.0,
-		nil,
-	},
-	{map[string]interface{}{
-		"Sex":      "female",
-		"Parch":    0,
-		"Age":      38,
-		"Fare":     71.2833,
-		"Pclass":   2,
-		"SibSp":    1,
-		"Embarked": "UnknownCategory",
-	},
-		-1,
-		errors.New("Terminal node without score"),
-	},
-}
+var _ = Describe("RandomForest", func() {
+	var (
+		lowScoreFeatures  map[string]interface{}
+		highScoreFeatures map[string]interface{}
+		errorFeatures map[string]interface{}
+		rf goscore.RandomForest
+		err error
+	)
+
+	BeforeEach(func() {
+		lowScoreFeatures = map[string]interface{}{
+			"Sex":      "male",
+			"Parch":    0,
+			"Age":      30,
+			"Fare":     9.6875,
+			"Pclass":   2,
+			"SibSp":    0,
+			"Embarked": "Q",
+		}
+
+		highScoreFeatures = map[string]interface{}{
+				"Sex":      "female",
+				"Parch":    0,
+				"Age":      38,
+				"Fare":     71.2833,
+				"Pclass":   2,
+				"SibSp":    1,
+				"Embarked": "C",
+		}
+
+		errorFeatures = map[string]interface{}{
+			"Sex":      "female",
+			"Parch":    0,
+			"Age":      38,
+			"Fare":     71.2833,
+			"Pclass":   2,
+			"SibSp":    1,
+			"Embarked": "UnknownCategory",
+		}
+
+		randomForestXml, err := ioutil.ReadFile("fixtures/random_forest.pmml")
+		if err != nil {
+			panic(err)
+		}
+
+		xml.Unmarshal([]byte(randomForestXml), &rf)
+		if err != nil {
+			panic(err)
+		}
+	})
+
+	Describe("Scores", func() {
+		It("Scores low", func() {
+			lowScore := 2.0 / 15.0
+			Expect(rf.Score(lowScoreFeatures, "1")).To(Equal(lowScore))
+			Expect(rf.ScoreConcurrently(lowScoreFeatures, "1")).To(Equal(lowScore))
+		})
+
+		It("Scores high", func() {
+			highScore := 14.0 / 15.0
+			Expect(rf.Score(highScoreFeatures, "1")).To(Equal(highScore))
+			Expect(rf.ScoreConcurrently(highScoreFeatures, "1")).To(Equal(highScore))
+		})
+	})
+
+	Describe("Errors", func() {
+		It("Errors",func() {
+			_, err = rf.Score(errorFeatures, "1")
+			Expect(err).To(MatchError(HavePrefix("Terminal node without score")))
+			_, err = rf.ScoreConcurrently(errorFeatures, "1")
+			Expect(err).To(MatchError(HavePrefix("Terminal node without score")))
+		})
+	})
+})
 
 func TestRandomForest(t *testing.T) {
-	randomForestXml, err := ioutil.ReadFile("fixtures/random_forest.pmml")
-	if err != nil {
-		panic(err)
-	}
-
-	var rf goscore.RandomForest
-	err = xml.Unmarshal([]byte(randomForestXml), &rf)
-	if err != nil {
-		panic(err)
-	}
-
-	for _, tt := range RandomForestTests {
-		actual, err := rf.Score(tt.features, "1")
-
-		if err != nil {
-			if tt.err == nil {
-				t.Errorf("expected no error, actual: %s",
-					err)
-			} else if !strings.HasPrefix(err.Error(), tt.err.Error()) {
-				t.Errorf("expected error %s, actual: %s",
-					tt.err.Error(),
-					err)
-			}
-		}
-
-		if err == nil && actual != tt.score {
-			t.Errorf("expected %f, actual %f",
-				tt.score,
-				actual)
-		}
-
-		actual, err = rf.ScoreConcurrently(tt.features, "1")
-
-		if err != nil {
-			if tt.err == nil {
-				t.Errorf("expected no error, actual: %s",
-					err)
-			} else if !strings.HasPrefix(err.Error(), tt.err.Error()) {
-				t.Errorf("expected error %s, actual: %s",
-					tt.err.Error(),
-					err)
-			}
-		}
-
-		if err == nil && actual != tt.score {
-			t.Errorf("expected %f, actual %f",
-				tt.score,
-				actual)
-		}
-	}
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "RandomForest Suite")
 }
