@@ -11,12 +11,12 @@ import (
 
 var _ = Describe("RandomForest", func() {
 	var (
-		lowScoreFeatures  map[string]interface{}
-		highScoreFeatures map[string]interface{}
+		lowScoreFeatures, highScoreFeatures  map[string]interface{}
+		lowScore, highScore float64
 		errorFeatures map[string]interface{}
 		rf goscore.RandomForest
 		err error
-		lowScore, highScore float64
+		first bool = true
 	)
 
 	BeforeEach(func() {
@@ -52,14 +52,17 @@ var _ = Describe("RandomForest", func() {
 			"Embarked": "UnknownCategory",
 		}
 
-		randomForestXml, err := ioutil.ReadFile("fixtures/random_forest.pmml")
-		if err != nil {
-			panic(err)
-		}
+		if first {
+			randomForestXml, err := ioutil.ReadFile("fixtures/random_forest.pmml")
+			if err != nil {
+				panic(err)
+			}
 
-		xml.Unmarshal([]byte(randomForestXml), &rf)
-		if err != nil {
-			panic(err)
+			xml.Unmarshal([]byte(randomForestXml), &rf)
+			if err != nil {
+				panic(err)
+			}
+			first = false
 		}
 	})
 
