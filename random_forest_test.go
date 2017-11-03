@@ -16,6 +16,7 @@ var _ = Describe("RandomForest", func() {
 		errorFeatures map[string]interface{}
 		rf goscore.RandomForest
 		err error
+		lowScore, highScore float64
 	)
 
 	BeforeEach(func() {
@@ -28,6 +29,7 @@ var _ = Describe("RandomForest", func() {
 			"SibSp":    0,
 			"Embarked": "Q",
 		}
+		lowScore = 2.0 / 15.0
 
 		highScoreFeatures = map[string]interface{}{
 				"Sex":      "female",
@@ -38,6 +40,7 @@ var _ = Describe("RandomForest", func() {
 				"SibSp":    1,
 				"Embarked": "C",
 		}
+		highScore = 14.0 / 15.0
 
 		errorFeatures = map[string]interface{}{
 			"Sex":      "female",
@@ -62,14 +65,18 @@ var _ = Describe("RandomForest", func() {
 
 	Describe("Scores", func() {
 		It("Scores low", func() {
-			lowScore := 2.0 / 15.0
 			Expect(rf.Score(lowScoreFeatures, "1")).To(Equal(lowScore))
+		})
+
+		It("Scores low concurrently", func() {
 			Expect(rf.ScoreConcurrently(lowScoreFeatures, "1")).To(Equal(lowScore))
 		})
 
 		It("Scores high", func() {
-			highScore := 14.0 / 15.0
 			Expect(rf.Score(highScoreFeatures, "1")).To(Equal(highScore))
+		})
+
+		It("Scores high concurrently", func() {
 			Expect(rf.ScoreConcurrently(highScoreFeatures, "1")).To(Equal(highScore))
 		})
 	})
