@@ -3,20 +3,20 @@ package goscore_test
 import (
 	"encoding/xml"
 	"github.com/asafschers/goscore"
-	"io/ioutil"
-	"testing"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"io/ioutil"
+	"testing"
 )
 
 var _ = Describe("RandomForest", func() {
 	var (
-		lowScoreFeatures, highScoreFeatures  map[string]interface{}
-		lowScore, highScore float64
-		errorFeatures map[string]interface{}
-		rf goscore.RandomForest
-		err error
-		first bool = true
+		lowScoreFeatures, highScoreFeatures map[string]interface{}
+		lowScore, highScore                 float64
+		errorFeatures                       map[string]interface{}
+		rf                                  goscore.RandomForest
+		err                                 error
+		first                               bool = true
 	)
 
 	BeforeEach(func() {
@@ -32,13 +32,13 @@ var _ = Describe("RandomForest", func() {
 		lowScore = 2.0 / 15.0
 
 		highScoreFeatures = map[string]interface{}{
-				"Sex":      "female",
-				"Parch":    0,
-				"Age":      38,
-				"Fare":     71.2833,
-				"Pclass":   2,
-				"SibSp":    1,
-				"Embarked": "C",
+			"Sex":      "female",
+			"Parch":    0,
+			"Age":      38,
+			"Fare":     71.2833,
+			"Pclass":   2,
+			"SibSp":    1,
+			"Embarked": "C",
 		}
 		highScore = 14.0 / 15.0
 
@@ -85,7 +85,7 @@ var _ = Describe("RandomForest", func() {
 	})
 
 	Describe("Errors", func() {
-		It("Errors",func() {
+		It("Errors", func() {
 			_, err = rf.Score(errorFeatures, "1")
 			Expect(err).To(MatchError(HavePrefix("Terminal node without score")))
 			_, err = rf.ScoreConcurrently(errorFeatures, "1")
