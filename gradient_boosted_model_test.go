@@ -15,7 +15,7 @@ var _ = Describe("GradientBoostedModel", func() {
 		highScore, lowScore                 float64
 		tolerance                           float64 = 0.000000001
 		gbm                                 goscore.GradientBoostedModel
-		first                               bool    = true
+		first                               bool = true
 	)
 
 	BeforeSuite(func() {
