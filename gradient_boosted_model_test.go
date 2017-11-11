@@ -1,11 +1,9 @@
 package goscore_test
 
 import (
-	"encoding/xml"
 	"github.com/asafschers/goscore"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"io/ioutil"
 	"testing"
 )
 
@@ -16,6 +14,7 @@ var _ = Describe("GradientBoostedModel", func() {
 		tolerance                           float64 = 0.000000001
 		gbm                                 goscore.GradientBoostedModel
 		first                               bool = true
+		err									error
 	)
 
 	BeforeSuite(func() {
@@ -42,17 +41,18 @@ var _ = Describe("GradientBoostedModel", func() {
 		highScore = 0.4178155014037758
 
 		if first {
-			GradientBoostedModelXml, err := ioutil.ReadFile("fixtures/gradient_boosted_model.pmml")
-			if err != nil {
-				panic(err)
-			}
-
-			err = xml.Unmarshal([]byte(GradientBoostedModelXml), &gbm)
+			gbm, err = goscore.LoadGradientBoostedModel("fixtures/gradient_boosted_model.pmml")
 			if err != nil {
 				panic(err)
 			}
 			first = false
 		}
+	})
+
+	Describe("Loads model", func() {
+		It("Loads all trees", func() {
+			Expect(len(gbm.Trees)).To(Equal(100))
+		})
 	})
 
 	Describe("Scores", func() {

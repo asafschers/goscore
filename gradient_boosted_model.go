@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"math"
 	"sync"
+	"io/ioutil"
 )
 
 // GradientBoostedModel - GradientBoostedModel PMML
@@ -17,6 +18,20 @@ type GradientBoostedModel struct {
 type target struct {
 	XMLName         xml.Name
 	RescaleConstant float64 `xml:"rescaleConstant,attr"`
+}
+
+// LoadGradientBoostedModel - Load Gradient Boosted Model PMML file to GradientBoostedModel struct
+func LoadGradientBoostedModel(fileName string) (gbm GradientBoostedModel, err error) {
+	GradientBoostedModelXml, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return gbm, err
+	}
+
+	err = xml.Unmarshal([]byte(GradientBoostedModelXml), &gbm)
+	if err != nil {
+		return gbm, err
+	}
+	return gbm, nil
 }
 
 // Score - traverses all trees in GradientBoostedModel with features and returns exp(sum) / (1 + exp(sum))
