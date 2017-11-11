@@ -13,8 +13,8 @@ type RandomForest struct {
 	Trees   []Node `xml:"MiningModel>Segmentation>Segment>TreeModel"`
 }
 
-// LoadFromFile - Load PMML file to RandomForest model
-func LoadFromFile(fileName string) (rf RandomForest, err error) {
+// LoadRandomForest - Load Random Forest PMML file to RandomForest struct
+func LoadRandomForest(fileName string) (rf RandomForest, err error) {
 	randomForestXml, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return rf, err

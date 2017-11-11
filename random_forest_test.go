@@ -51,7 +51,7 @@ var _ = Describe("RandomForest", func() {
 		}
 
 		if first {
-			rf, err = goscore.LoadFromFile("fixtures/random_forest.pmml")
+			rf, err = goscore.LoadRandomForest("fixtures/random_forest.pmml")
 			if err != nil {
 				panic(err)
 			}
@@ -62,10 +62,6 @@ var _ = Describe("RandomForest", func() {
 	Describe("Loads model", func() {
 		It("Loads all trees", func() {
 			Expect(len(rf.Trees)).To(Equal(15))
-		})
-
-		It("Resets when reloading", func() {
-
 		})
 	})
 
