@@ -4,12 +4,27 @@ import (
 	"encoding/xml"
 	"strconv"
 	"sync"
+	"io/ioutil"
 )
 
 // RandomForest - PMML Random Forest
 type RandomForest struct {
 	XMLName xml.Name
 	Trees   []Node `xml:"MiningModel>Segmentation>Segment>TreeModel"`
+}
+
+// LoadFromFile - Load PMML file to RandomForest model
+func LoadFromFile(fileName string) (rf RandomForest, err error) {
+	randomForestXml, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return rf, err
+	}
+
+	err = xml.Unmarshal([]byte(randomForestXml), &rf)
+	if err != nil {
+		return rf, err
+	}
+	return rf, nil
 }
 
 // Score - traverses all trees in RandomForest with features and returns ratio of

@@ -1,11 +1,9 @@
 package goscore_test
 
 import (
-	"encoding/xml"
 	"github.com/asafschers/goscore"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"io/ioutil"
 	"testing"
 )
 
@@ -53,17 +51,22 @@ var _ = Describe("RandomForest", func() {
 		}
 
 		if first {
-			randomForestXml, err := ioutil.ReadFile("fixtures/random_forest.pmml")
-			if err != nil {
-				panic(err)
-			}
-
-			xml.Unmarshal([]byte(randomForestXml), &rf)
+			rf, err = goscore.LoadFromFile("fixtures/random_forest.pmml")
 			if err != nil {
 				panic(err)
 			}
 			first = false
 		}
+	})
+
+	Describe("Loads model", func() {
+		It("Loads all trees", func() {
+			Expect(len(rf.Trees)).To(Equal(15))
+		})
+
+		It("Resets when reloading", func() {
+
+		})
 	})
 
 	Describe("Scores", func() {
