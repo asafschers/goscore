@@ -2,9 +2,9 @@ package goscore
 
 import (
 	"encoding/xml"
+	"io/ioutil"
 	"math"
 	"sync"
-	"io/ioutil"
 )
 
 // GradientBoostedModel - GradientBoostedModel PMML

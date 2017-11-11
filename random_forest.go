@@ -2,9 +2,9 @@ package goscore
 
 import (
 	"encoding/xml"
+	"io/ioutil"
 	"strconv"
 	"sync"
-	"io/ioutil"
 )
 
 // RandomForest - PMML Random Forest
