@@ -3,6 +3,7 @@ package goscore
 import (
 	"encoding/xml"
 	"errors"
+	"io"
 	"math"
 	"sort"
 	"strings"
@@ -10,8 +11,19 @@ import (
 
 func init() {
 	ActivationFunctions = map[string]ActivationFunction{}
-
 	ActivationFunctions["identity"] = IdentityActivationFunction
+	ActivationFunctions["logistic"] = LogisticActivationFunction
+	ActivationFunctions["tanh"] = TanhActivationFunction
+	ActivationFunctions["exponential"] = ExponentialActivationFunction
+	ActivationFunctions["reciprocal"] = ReciprocalActivationFunction
+	ActivationFunctions["square"] = SquareActivationFunction
+	ActivationFunctions["Gauss"] = GaussActivationFunction
+	ActivationFunctions["sine"] = SineActivationFunction
+	ActivationFunctions["cosine"] = CosineActivationFunction
+	ActivationFunctions["Elliott"] = ElliottActivationFunction
+	ActivationFunctions["arctan"] = ArctanActivationFunction
+	ActivationFunctions["rectifier"] = RectifierActivationFunction
+
 	NormalizationMethods = map[string]NormalizationMethod{}
 	NormalizationMethods["softmax"] = SoftmaxNormalizationMethod
 }
@@ -77,17 +89,39 @@ type NeuralLayer struct {
 	Neuron              []Neuron `xml:"Neuron"`
 	ActivationFunction  string   `xml:"activationFunction,attr"`
 	NormalizationMethod string   `xml:"normalizationMethod,attr"`
+	Threshold           float64  `xml:"threshold,attr"`
 }
 type NeuralNetwork struct {
 	XMLName xml.Name
 	//Struct  NeuralNetWorkStructure `xml:"PMML>NeuralNetwork"`
-	InputLayer          NeuralInputs  `xml:"NeuralNetwork>NeuralInputs"`
-	NeuralOutputs       NeuralOutputs `xml:"NeuralNetwork>NeuralOutputs"`
-	OutputLayer         Outputs       `xml:"NeuralNetwork>Output"`
-	Fields              []MiningField `xml:"NeuralNetwork>MiningSchema>MiningField"`
-	Layers              []NeuralLayer `xml:"NeuralNetwork>NeuralLayer"`
+	InputLayer          NeuralInputs  `xml:"NeuralInputs"`
+	NeuralOutputs       NeuralOutputs `xml:"NeuralOutputs"`
+	OutputLayer         Outputs       `xml:"Output"`
+	Fields              []MiningField `xml:"MiningSchema>MiningField"`
+	Layers              []NeuralLayer `xml:"NeuralLayer"`
 	ActivationFunction  string        `xml:"activationFunction,attr"`
 	NormalizationMethod string        `xml:"normalizationMethod,attr"`
+	Threshold           float64       `xml:"threshold,attr"`
+}
+type PMMLNN struct {
+	NeuralNetwork NeuralNetwork `xml:"NeuralNetwork"`
+}
+
+func NewNeuralNetwork(source []byte) (*NeuralNetwork, error) {
+	pmml := PMMLNN{}
+	err := xml.Unmarshal(source, &pmml)
+	if err != nil {
+		return nil, err
+	}
+	return &pmml.NeuralNetwork, nil
+}
+func NewNeuralNetworkFromReader(source io.Reader) (*NeuralNetwork, error) {
+	pmml := PMMLNN{}
+	err := xml.NewDecoder(source).Decode(&pmml)
+	if err != nil {
+		return nil, err
+	}
+	return &pmml.NeuralNetwork, nil
 }
 
 func (nn *NeuralNetwork) Score(feature map[string]interface{}, outputName string) (float64, error) {
@@ -197,6 +231,39 @@ func NewThresHoldFunction(a float64) ActivationFunction {
 }
 func IdentityActivationFunction(b float64) float64 {
 	return b
+}
+func LogisticActivationFunction(b float64) float64 {
+	return 1.0 / (1 + math.Exp(b))
+}
+func TanhActivationFunction(b float64) float64 {
+	return (1 - math.Exp(-2*b)) / (1 + math.Exp(-2*b))
+}
+func ExponentialActivationFunction(Z float64) float64 {
+	return math.Exp(Z)
+}
+func ReciprocalActivationFunction(Z float64) float64 {
+	return 1.0 / Z
+}
+func SquareActivationFunction(Z float64) float64 {
+	return Z * Z
+}
+func GaussActivationFunction(Z float64) float64 {
+	return math.Exp(-(Z * Z))
+}
+func SineActivationFunction(Z float64) float64 {
+	return math.Sin(Z)
+}
+func CosineActivationFunction(Z float64) float64 {
+	return math.Cos(Z)
+}
+func ElliottActivationFunction(Z float64) float64 {
+	return Z / (1 + math.Abs(Z))
+}
+func ArctanActivationFunction(Z float64) float64 {
+	return 2 * math.Atan(Z) / math.Pi
+}
+func RectifierActivationFunction(Z float64) float64 {
+	return math.Max(0, Z)
 }
 func SoftmaxNormalizationMethod(input ...float64) []float64 {
 	hasil := []float64{}
