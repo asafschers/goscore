@@ -142,7 +142,7 @@ func (nn *NeuralNetwork) Score(feature map[string]interface{}, outputName string
 		if _, ok := ActivationFunctions[nn.ActivationFunction]; !ok {
 			return 0, ActivationFunctionNotImplemented
 		} else {
-			actFunc = ActivationFunctions["identity"]
+			actFunc = ActivationFunctions[nn.ActivationFunction]
 		}
 	}
 	if nn.NormalizationMethod != "" {
@@ -162,7 +162,7 @@ func (nn *NeuralNetwork) Score(feature map[string]interface{}, outputName string
 			if _, ok := ActivationFunctions[layer.ActivationFunction]; !ok {
 				return 0, ActivationFunctionNotImplemented
 			} else {
-				actFuncL = ActivationFunctions["identity"]
+				actFuncL = ActivationFunctions[layer.ActivationFunction]
 			}
 		}
 		if layer.NormalizationMethod != "" {
