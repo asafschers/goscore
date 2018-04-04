@@ -6,7 +6,7 @@
 
 Go scoring API for Predictive Model Markup Language (PMML).
 
-Currently supports Decision Tree, Random Forest and Gradient Boosted Models
+Currently supports Neural Network, Decision Tree, Random Forest and Gradient Boosted Models
 
 Will be happy to implement new models by demand, or assist with any other issue.
 
