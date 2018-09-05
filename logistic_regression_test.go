@@ -33,10 +33,20 @@ func Test_parsinglogreg(t *testing.T) {
 	fmt.Println(confidence)
 	fmt.Println(err)
 
-	// features0 := map[string]float64{}
-	// label, confidence, err = lr.Score(features0, false)
-	// fmt.Println(label)
-	// fmt.Println(confidence)
-	// fmt.Println(err)
+	label, confidence, err = lr.Score(features1, false)
+	fmt.Println(label)
+	fmt.Println(confidence)
+	fmt.Println(err)
+
+	features0 := map[string]float64{}
+	label, confidence, err = lr.Score(features0)
+	fmt.Println(label)
+	fmt.Println(confidence)
+	fmt.Println(err)
+
+	label, confidence, err = lr.Score(features0, false)
+	fmt.Println(label)
+	fmt.Println(confidence)
+	fmt.Println(err)
 
 }
