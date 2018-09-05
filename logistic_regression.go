@@ -3,7 +3,6 @@ package goscore
 import (
 	"encoding/xml"
 	"errors"
-	"io"
 	"math"
 )
 
@@ -84,14 +83,14 @@ func NewLogisticRegression(source []byte) (*LogisticRegression, error) {
 	return &pmml.LogisticRegression, nil
 }
 
-func NewLogisticRegressionFromReader(source io.Reader) (*LogisticRegression, error) {
-	pmml := PMMLLR{}
-	err := xml.NewDecoder(source).Decode(&pmml)
-	if err != nil {
-		return nil, err
-	}
-	return &pmml.LogisticRegression, nil
-}
+// func NewLogisticRegressionFromReader(source io.Reader) (*LogisticRegression, error) {
+// 	pmml := PMMLLR{}
+// 	err := xml.NewDecoder(source).Decode(&pmml)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return &pmml.LogisticRegression, nil
+// }
 
 // method for score test data
 // input : 	independent variable with map["var name"]value
