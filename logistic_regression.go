@@ -45,14 +45,14 @@ var NormalizationMethodNotImplemented = errors.New("Normalization Method Not Imp
 
 func init() {
 	NormalizationMethods = map[string]NormalizationMethod{}
-	NormalizationMethods["softmax"] = SoftmaxNormalizationMethod
+	NormalizationMethods["softmax"] = SoftmaxNormalizationMethods
 }
 
 // function for compute confidence value
 // into probability using softMax function
-// input  : array of confidence value with float64 type
-// output : array of probability each class with float64 type
-func SoftmaxNormalizationMethod(confidence map[string]float64) map[string]float64 {
+// input  : map of confidence value with float64 type
+// output : map of probability each class with float64 type
+func SoftmaxNormalizationMethods(confidence map[string]float64) map[string]float64 {
 	result := map[string]float64{}
 	tempExp := []float64{}
 	for _, v := range confidence {
@@ -151,16 +151,21 @@ func (lr *LogisticRegression) RegressionFunctionContinuous(features map[string]f
 	confidence := map[string]float64{}
 
 	for _, regressionTable := range lr.RegressionTable {
-		intercept := regressionTable.Intercept
 
-		sum := 0.0
-		for k, v := range features {
-			if c, ok := regressionTable.NumericPredictorMap[k]; ok {
-				sum += v * c
-			}
+		var intercept float64
+		if regressionTable.Intercept != 0.0 {
+			intercept := regressionTable.Intercept
 		}
 
-		confidence[regressionTable.TargetCategory] = intercept + sum
+		if regressionTable.NumericPredictorMap != nil {
+			sum := 0.0
+			for k, v := range features {
+				if c, ok := regressionTable.NumericPredictorMap[k]; ok {
+					sum += v * c
+				}
+			}
+			confidence[regressionTable.TargetCategory] = intercept + sum
+		}
 	}
 
 	return confidence
