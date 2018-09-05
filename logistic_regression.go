@@ -18,10 +18,10 @@ type LogisticRegression struct {
 	RegressionTable     []RegressionTable `xml:"RegressionTable"`
 }
 
-type MiningField struct {
-	// struct xml:PMML>RegressionModel>MiningSchema>MiningField
-	Name string `xml:"name,attr"`
-}
+// type MiningField struct {
+// 	// struct xml:PMML>RegressionModel>MiningSchema>MiningField
+// 	Name string `xml:"name,attr"`
+// }
 
 type RegressionTable struct {
 	// struct xml:PMML>RegressionModel>RegressionTable
@@ -154,7 +154,7 @@ func (lr *LogisticRegression) RegressionFunctionContinuous(features map[string]f
 
 		var intercept float64
 		if regressionTable.Intercept != 0.0 {
-			intercept := regressionTable.Intercept
+			intercept = regressionTable.Intercept
 		}
 
 		if regressionTable.NumericPredictorMap != nil {
