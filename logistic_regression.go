@@ -2,7 +2,6 @@ package goscore
 
 import (
 	"encoding/xml"
-	"errors"
 	"io"
 	"math"
 )
@@ -38,14 +37,15 @@ type NumericPredictor struct {
 	Coefficient float64 `xml:"coefficient,attr"`
 }
 
-type NormalizationMethod func(map[string]float64) map[string]float64
+type NormalizationMethodMap func(map[string]float64) map[string]float64
 
-var NormalizationMethods map[string]NormalizationMethod
-var NormalizationMethodNotImplemented = errors.New("Normalization Method Not Implemented Yet")
+var NormalizationMethodMaps map[string]NormalizationMethodMap
+
+//var NormalizationMethodNotImplemented = errors.New("Normalization Method Not Implemented Yet")
 
 func init() {
-	NormalizationMethods = map[string]NormalizationMethod{}
-	NormalizationMethods["softmax"] = SoftmaxNormalizationMethods
+	NormalizationMethodMaps = map[string]NormalizationMethodMap{}
+	NormalizationMethodMaps["softmax"] = SoftmaxNormalizationMethods
 }
 
 // function for compute confidence value
@@ -122,12 +122,12 @@ func (lr *LogisticRegression) Score(args ...interface{}) (string, map[string]flo
 	}
 
 	// calculate confident value with normalization method
-	var normMethod NormalizationMethod
+	var normMethod NormalizationMethodMap
 	if lr.NormalizationMethod != "" {
 		if _, ok := NormalizationMethods[lr.NormalizationMethod]; !ok {
 			return "", nil, NormalizationMethodNotImplemented
 		} else {
-			normMethod = NormalizationMethods[lr.NormalizationMethod]
+			normMethod = NormalizationMethodMaps[lr.NormalizationMethod]
 		}
 	}
 	prob := normMethod(confident)
