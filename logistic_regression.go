@@ -112,7 +112,7 @@ func (lr *LogisticRegression) Score(args ...interface{}) (string, map[string]flo
 		case bool:
 			voting = t
 		default:
-			panic("Unknown argument")
+			return "", nil, errors.New("Unknown argument")
 		}
 	}
 	// calculate confident value using log reg function

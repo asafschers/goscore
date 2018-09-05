@@ -64,4 +64,8 @@ func Test_parsinglogreg(t *testing.T) {
 	fmt.Println(prob)
 	fmt.Println(err)
 
+	label, confidence, err = lr.Score("test wrong input")
+	fmt.Println(label)
+	fmt.Println(confidence)
+	fmt.Println(err)
 }
