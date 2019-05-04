@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header>
+		<Application name="JPMML-SparkML" version="1.4.5"/>
+		<Timestamp>2018-09-01T07:27:06Z</Timestamp>
+	</Header>
+	<DataDictionary>
+		<DataField name="labels" optype="categorical" dataType="string">
+			<Value value="CATEGORY_0"/>
+			<Value value="CATEGORY_1"/>
+			<Value value="CATEGORY_2"/>
+			<Value value="CATEGORY_3"/>
+			<Value value="CATEGORY_4"/>
+		</DataField>
+		<DataField name="x0" optype="continuous" dataType="double"/>
+		<DataField name="x1" optype="continuous" dataType="double"/>
+		<DataField name="x2" optype="continuous" dataType="double"/>
+		<DataField name="x3" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<RegressionModel functionName="classification" normalizationMethod="softmax">
+		<MiningSchema>
+			<MiningField name="labels" usageType="target"/>
+			<MiningField name="x0"/>
+			<MiningField name="x1"/>
+			<MiningField name="x2"/>
+			<MiningField name="x3"/>
+		</MiningSchema>
+		<Output>
+			<OutputField name="pmml(prediction)" optype="categorical" dataType="string" feature="predictedValue"/>
+			<OutputField name="prediction" optype="categorical" dataType="double" feature="transformedValue">
+				<MapValues outputColumn="data:output">
+					<FieldColumnPair field="pmml(prediction)" column="data:input"/>
+					<InlineTable>
+						<row>
+							<data:input>CATEGORY_0</data:input>
+							<data:output>0</data:output>
+						</row>
+						<row>
+							<data:input>CATEGORY_1</data:input>
+							<data:output>1</data:output>
+						</row>
+						<row>
+							<data:input>CATEGORY_2</data:input>
+							<data:output>2</data:output>
+						</row>
+						<row>
+							<data:input>CATEGORY_3</data:input>
+							<data:output>3</data:output>
+						</row>
+						<row>
+							<data:input>CATEGORY_4</data:input>
+							<data:output>4</data:output>
+						</row>
+					</InlineTable>
+				</MapValues>
+			</OutputField>
+			<OutputField name="probability(CATEGORY_0)" optype="continuous" dataType="double" feature="probability" value="CATEGORY_0"/>
+			<OutputField name="probability(CATEGORY_1)" optype="continuous" dataType="double" feature="probability" value="CATEGORY_1"/>
+			<OutputField name="probability(CATEGORY_2)" optype="continuous" dataType="double" feature="probability" value="CATEGORY_2"/>
+			<OutputField name="probability(CATEGORY_3)" optype="continuous" dataType="double" feature="probability" value="CATEGORY_3"/>
+			<OutputField name="probability(CATEGORY_4)" optype="continuous" dataType="double" feature="probability" value="CATEGORY_4"/>
+		</Output>
+		<RegressionTable intercept="-0.6171116237481978" targetCategory="CATEGORY_0">
+			<NumericPredictor name="x0" coefficient="1.3722911765607988"/>
+			<NumericPredictor name="x1" coefficient="-0.17113897760004382"/>
+			<NumericPredictor name="x2" coefficient="-0.17631167153749885"/>
+			<NumericPredictor name="x3" coefficient="-0.09622445632389107"/>
+		</RegressionTable>
+		<RegressionTable intercept="-0.30232110369743886" targetCategory="CATEGORY_1">
+			<NumericPredictor name="x0" coefficient="-0.2656827414284933"/>
+			<NumericPredictor name="x1" coefficient="1.1941231195784114"/>
+			<NumericPredictor name="x2" coefficient="-0.24663090110628383"/>
+			<NumericPredictor name="x3" coefficient="-0.1472411229835166"/>
+		</RegressionTable>
+		<RegressionTable intercept="-0.18910946540998239" targetCategory="CATEGORY_2">
+			<NumericPredictor name="x0" coefficient="-0.25368282155486765"/>
+			<NumericPredictor name="x1" coefficient="-0.2707047042709708"/>
+			<NumericPredictor name="x2" coefficient="1.03845830852432"/>
+			<NumericPredictor name="x3" coefficient="-0.163141698532135"/>
+		</RegressionTable>
+		<RegressionTable intercept="1.298312457272828" targetCategory="CATEGORY_3">
+			<NumericPredictor name="x0" coefficient="-0.5637109971583922"/>
+			<NumericPredictor name="x1" coefficient="-0.5521781279301016"/>
+			<NumericPredictor name="x2" coefficient="-0.3813562660762397"/>
+			<NumericPredictor name="x3" coefficient="0.5506743178740291"/>
+
+		</RegressionTable>
+		<RegressionTable intercept="-0.18977026441720904" targetCategory="CATEGORY_4">
+			<NumericPredictor name="x0" coefficient="-0.28921461641899854"/>
+			<NumericPredictor name="x1" coefficient="-0.20010130977737767"/>
+			<NumericPredictor name="x2" coefficient="-0.23415946980424598"/>
+			<NumericPredictor name="x3" coefficient="-0.14406704003449006"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>
